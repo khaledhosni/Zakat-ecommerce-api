@@ -42,6 +42,7 @@ export type UsersMinAggregateOutputType = {
   phone: string | null
   is_active: boolean | null
   created_at: Date | null
+  refresh_token_hash: string | null
 }
 
 export type UsersMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type UsersMaxAggregateOutputType = {
   phone: string | null
   is_active: boolean | null
   created_at: Date | null
+  refresh_token_hash: string | null
 }
 
 export type UsersCountAggregateOutputType = {
@@ -62,6 +64,7 @@ export type UsersCountAggregateOutputType = {
   phone: number
   is_active: number
   created_at: number
+  refresh_token_hash: number
   _all: number
 }
 
@@ -82,6 +85,7 @@ export type UsersMinAggregateInputType = {
   phone?: true
   is_active?: true
   created_at?: true
+  refresh_token_hash?: true
 }
 
 export type UsersMaxAggregateInputType = {
@@ -92,6 +96,7 @@ export type UsersMaxAggregateInputType = {
   phone?: true
   is_active?: true
   created_at?: true
+  refresh_token_hash?: true
 }
 
 export type UsersCountAggregateInputType = {
@@ -102,6 +107,7 @@ export type UsersCountAggregateInputType = {
   phone?: true
   is_active?: true
   created_at?: true
+  refresh_token_hash?: true
   _all?: true
 }
 
@@ -199,6 +205,7 @@ export type UsersGroupByOutputType = {
   phone: string | null
   is_active: boolean
   created_at: Date
+  refresh_token_hash: string | null
   _count: UsersCountAggregateOutputType | null
   _avg: UsersAvgAggregateOutputType | null
   _sum: UsersSumAggregateOutputType | null
@@ -232,7 +239,9 @@ export type usersWhereInput = {
   phone?: Prisma.StringNullableFilter<"users"> | string | null
   is_active?: Prisma.BoolFilter<"users"> | boolean
   created_at?: Prisma.DateTimeFilter<"users"> | Date | string
+  refresh_token_hash?: Prisma.StringNullableFilter<"users"> | string | null
   orders?: Prisma.OrdersListRelationFilter
+  refresh_sessions?: Prisma.Refresh_sessionsListRelationFilter
   user_roles?: Prisma.User_rolesListRelationFilter
 }
 
@@ -244,7 +253,9 @@ export type usersOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  refresh_token_hash?: Prisma.SortOrderInput | Prisma.SortOrder
   orders?: Prisma.ordersOrderByRelationAggregateInput
+  refresh_sessions?: Prisma.refresh_sessionsOrderByRelationAggregateInput
   user_roles?: Prisma.user_rolesOrderByRelationAggregateInput
 }
 
@@ -259,7 +270,9 @@ export type usersWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"users"> | string | null
   is_active?: Prisma.BoolFilter<"users"> | boolean
   created_at?: Prisma.DateTimeFilter<"users"> | Date | string
+  refresh_token_hash?: Prisma.StringNullableFilter<"users"> | string | null
   orders?: Prisma.OrdersListRelationFilter
+  refresh_sessions?: Prisma.Refresh_sessionsListRelationFilter
   user_roles?: Prisma.User_rolesListRelationFilter
 }, "user_id" | "email">
 
@@ -271,6 +284,7 @@ export type usersOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  refresh_token_hash?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.usersCountOrderByAggregateInput
   _avg?: Prisma.usersAvgOrderByAggregateInput
   _max?: Prisma.usersMaxOrderByAggregateInput
@@ -289,6 +303,7 @@ export type usersScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
   is_active?: Prisma.BoolWithAggregatesFilter<"users"> | boolean
   created_at?: Prisma.DateTimeWithAggregatesFilter<"users"> | Date | string
+  refresh_token_hash?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
 }
 
 export type usersCreateInput = {
@@ -299,7 +314,9 @@ export type usersCreateInput = {
   phone?: string | null
   is_active?: boolean
   created_at?: Date | string
+  refresh_token_hash?: string | null
   orders?: Prisma.ordersCreateNestedManyWithoutUsersInput
+  refresh_sessions?: Prisma.refresh_sessionsCreateNestedManyWithoutUsersInput
   user_roles?: Prisma.user_rolesCreateNestedManyWithoutUsersInput
 }
 
@@ -311,7 +328,9 @@ export type usersUncheckedCreateInput = {
   phone?: string | null
   is_active?: boolean
   created_at?: Date | string
+  refresh_token_hash?: string | null
   orders?: Prisma.ordersUncheckedCreateNestedManyWithoutUsersInput
+  refresh_sessions?: Prisma.refresh_sessionsUncheckedCreateNestedManyWithoutUsersInput
   user_roles?: Prisma.user_rolesUncheckedCreateNestedManyWithoutUsersInput
 }
 
@@ -323,7 +342,9 @@ export type usersUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.ordersUpdateManyWithoutUsersNestedInput
+  refresh_sessions?: Prisma.refresh_sessionsUpdateManyWithoutUsersNestedInput
   user_roles?: Prisma.user_rolesUpdateManyWithoutUsersNestedInput
 }
 
@@ -335,7 +356,9 @@ export type usersUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.ordersUncheckedUpdateManyWithoutUsersNestedInput
+  refresh_sessions?: Prisma.refresh_sessionsUncheckedUpdateManyWithoutUsersNestedInput
   user_roles?: Prisma.user_rolesUncheckedUpdateManyWithoutUsersNestedInput
 }
 
@@ -347,6 +370,7 @@ export type usersCreateManyInput = {
   phone?: string | null
   is_active?: boolean
   created_at?: Date | string
+  refresh_token_hash?: string | null
 }
 
 export type usersUpdateManyMutationInput = {
@@ -357,6 +381,7 @@ export type usersUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type usersUncheckedUpdateManyInput = {
@@ -367,6 +392,7 @@ export type usersUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UsersScalarRelationFilter = {
@@ -382,6 +408,7 @@ export type usersCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  refresh_token_hash?: Prisma.SortOrder
 }
 
 export type usersAvgOrderByAggregateInput = {
@@ -396,6 +423,7 @@ export type usersMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  refresh_token_hash?: Prisma.SortOrder
 }
 
 export type usersMinOrderByAggregateInput = {
@@ -406,6 +434,7 @@ export type usersMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  refresh_token_hash?: Prisma.SortOrder
 }
 
 export type usersSumOrderByAggregateInput = {
@@ -440,6 +469,20 @@ export type usersUpdateOneRequiredWithoutUser_rolesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutUser_rolesInput, Prisma.usersUpdateWithoutUser_rolesInput>, Prisma.usersUncheckedUpdateWithoutUser_rolesInput>
 }
 
+export type usersCreateNestedOneWithoutRefresh_sessionsInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutRefresh_sessionsInput, Prisma.usersUncheckedCreateWithoutRefresh_sessionsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutRefresh_sessionsInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneRequiredWithoutRefresh_sessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutRefresh_sessionsInput, Prisma.usersUncheckedCreateWithoutRefresh_sessionsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutRefresh_sessionsInput
+  upsert?: Prisma.usersUpsertWithoutRefresh_sessionsInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutRefresh_sessionsInput, Prisma.usersUpdateWithoutRefresh_sessionsInput>, Prisma.usersUncheckedUpdateWithoutRefresh_sessionsInput>
+}
+
 export type usersCreateWithoutOrdersInput = {
   user_id?: bigint | number
   full_name: string
@@ -448,6 +491,8 @@ export type usersCreateWithoutOrdersInput = {
   phone?: string | null
   is_active?: boolean
   created_at?: Date | string
+  refresh_token_hash?: string | null
+  refresh_sessions?: Prisma.refresh_sessionsCreateNestedManyWithoutUsersInput
   user_roles?: Prisma.user_rolesCreateNestedManyWithoutUsersInput
 }
 
@@ -459,6 +504,8 @@ export type usersUncheckedCreateWithoutOrdersInput = {
   phone?: string | null
   is_active?: boolean
   created_at?: Date | string
+  refresh_token_hash?: string | null
+  refresh_sessions?: Prisma.refresh_sessionsUncheckedCreateNestedManyWithoutUsersInput
   user_roles?: Prisma.user_rolesUncheckedCreateNestedManyWithoutUsersInput
 }
 
@@ -486,6 +533,8 @@ export type usersUpdateWithoutOrdersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refresh_sessions?: Prisma.refresh_sessionsUpdateManyWithoutUsersNestedInput
   user_roles?: Prisma.user_rolesUpdateManyWithoutUsersNestedInput
 }
 
@@ -497,6 +546,8 @@ export type usersUncheckedUpdateWithoutOrdersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refresh_sessions?: Prisma.refresh_sessionsUncheckedUpdateManyWithoutUsersNestedInput
   user_roles?: Prisma.user_rolesUncheckedUpdateManyWithoutUsersNestedInput
 }
 
@@ -508,7 +559,9 @@ export type usersCreateWithoutUser_rolesInput = {
   phone?: string | null
   is_active?: boolean
   created_at?: Date | string
+  refresh_token_hash?: string | null
   orders?: Prisma.ordersCreateNestedManyWithoutUsersInput
+  refresh_sessions?: Prisma.refresh_sessionsCreateNestedManyWithoutUsersInput
 }
 
 export type usersUncheckedCreateWithoutUser_rolesInput = {
@@ -519,7 +572,9 @@ export type usersUncheckedCreateWithoutUser_rolesInput = {
   phone?: string | null
   is_active?: boolean
   created_at?: Date | string
+  refresh_token_hash?: string | null
   orders?: Prisma.ordersUncheckedCreateNestedManyWithoutUsersInput
+  refresh_sessions?: Prisma.refresh_sessionsUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type usersCreateOrConnectWithoutUser_rolesInput = {
@@ -546,7 +601,9 @@ export type usersUpdateWithoutUser_rolesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.ordersUpdateManyWithoutUsersNestedInput
+  refresh_sessions?: Prisma.refresh_sessionsUpdateManyWithoutUsersNestedInput
 }
 
 export type usersUncheckedUpdateWithoutUser_rolesInput = {
@@ -557,7 +614,77 @@ export type usersUncheckedUpdateWithoutUser_rolesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.ordersUncheckedUpdateManyWithoutUsersNestedInput
+  refresh_sessions?: Prisma.refresh_sessionsUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type usersCreateWithoutRefresh_sessionsInput = {
+  user_id?: bigint | number
+  full_name: string
+  email: string
+  password_hash: string
+  phone?: string | null
+  is_active?: boolean
+  created_at?: Date | string
+  refresh_token_hash?: string | null
+  orders?: Prisma.ordersCreateNestedManyWithoutUsersInput
+  user_roles?: Prisma.user_rolesCreateNestedManyWithoutUsersInput
+}
+
+export type usersUncheckedCreateWithoutRefresh_sessionsInput = {
+  user_id?: bigint | number
+  full_name: string
+  email: string
+  password_hash: string
+  phone?: string | null
+  is_active?: boolean
+  created_at?: Date | string
+  refresh_token_hash?: string | null
+  orders?: Prisma.ordersUncheckedCreateNestedManyWithoutUsersInput
+  user_roles?: Prisma.user_rolesUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type usersCreateOrConnectWithoutRefresh_sessionsInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutRefresh_sessionsInput, Prisma.usersUncheckedCreateWithoutRefresh_sessionsInput>
+}
+
+export type usersUpsertWithoutRefresh_sessionsInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutRefresh_sessionsInput, Prisma.usersUncheckedUpdateWithoutRefresh_sessionsInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutRefresh_sessionsInput, Prisma.usersUncheckedCreateWithoutRefresh_sessionsInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutRefresh_sessionsInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutRefresh_sessionsInput, Prisma.usersUncheckedUpdateWithoutRefresh_sessionsInput>
+}
+
+export type usersUpdateWithoutRefresh_sessionsInput = {
+  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  full_name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orders?: Prisma.ordersUpdateManyWithoutUsersNestedInput
+  user_roles?: Prisma.user_rolesUpdateManyWithoutUsersNestedInput
+}
+
+export type usersUncheckedUpdateWithoutRefresh_sessionsInput = {
+  user_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  full_name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  refresh_token_hash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orders?: Prisma.ordersUncheckedUpdateManyWithoutUsersNestedInput
+  user_roles?: Prisma.user_rolesUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 
@@ -567,11 +694,13 @@ export type usersUncheckedUpdateWithoutUser_rolesInput = {
 
 export type UsersCountOutputType = {
   orders: number
+  refresh_sessions: number
   user_roles: number
 }
 
 export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orders?: boolean | UsersCountOutputTypeCountOrdersArgs
+  refresh_sessions?: boolean | UsersCountOutputTypeCountRefresh_sessionsArgs
   user_roles?: boolean | UsersCountOutputTypeCountUser_rolesArgs
 }
 
@@ -595,6 +724,13 @@ export type UsersCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Ex
 /**
  * UsersCountOutputType without action
  */
+export type UsersCountOutputTypeCountRefresh_sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.refresh_sessionsWhereInput
+}
+
+/**
+ * UsersCountOutputType without action
+ */
 export type UsersCountOutputTypeCountUser_rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.user_rolesWhereInput
 }
@@ -608,7 +744,9 @@ export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   phone?: boolean
   is_active?: boolean
   created_at?: boolean
+  refresh_token_hash?: boolean
   orders?: boolean | Prisma.users$ordersArgs<ExtArgs>
+  refresh_sessions?: boolean | Prisma.users$refresh_sessionsArgs<ExtArgs>
   user_roles?: boolean | Prisma.users$user_rolesArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
@@ -621,6 +759,7 @@ export type usersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   phone?: boolean
   is_active?: boolean
   created_at?: boolean
+  refresh_token_hash?: boolean
 }, ExtArgs["result"]["users"]>
 
 export type usersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -631,6 +770,7 @@ export type usersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   phone?: boolean
   is_active?: boolean
   created_at?: boolean
+  refresh_token_hash?: boolean
 }, ExtArgs["result"]["users"]>
 
 export type usersSelectScalar = {
@@ -641,11 +781,13 @@ export type usersSelectScalar = {
   phone?: boolean
   is_active?: boolean
   created_at?: boolean
+  refresh_token_hash?: boolean
 }
 
-export type usersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"user_id" | "full_name" | "email" | "password_hash" | "phone" | "is_active" | "created_at", ExtArgs["result"]["users"]>
+export type usersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"user_id" | "full_name" | "email" | "password_hash" | "phone" | "is_active" | "created_at" | "refresh_token_hash", ExtArgs["result"]["users"]>
 export type usersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orders?: boolean | Prisma.users$ordersArgs<ExtArgs>
+  refresh_sessions?: boolean | Prisma.users$refresh_sessionsArgs<ExtArgs>
   user_roles?: boolean | Prisma.users$user_rolesArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -656,6 +798,7 @@ export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name: "users"
   objects: {
     orders: Prisma.$ordersPayload<ExtArgs>[]
+    refresh_sessions: Prisma.$refresh_sessionsPayload<ExtArgs>[]
     user_roles: Prisma.$user_rolesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -666,6 +809,7 @@ export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     phone: string | null
     is_active: boolean
     created_at: Date
+    refresh_token_hash: string | null
   }, ExtArgs["result"]["users"]>
   composites: {}
 }
@@ -1061,6 +1205,7 @@ readonly fields: usersFieldRefs;
 export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   orders<T extends Prisma.users$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ordersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  refresh_sessions<T extends Prisma.users$refresh_sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$refresh_sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$refresh_sessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user_roles<T extends Prisma.users$user_rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$user_rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$user_rolesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1098,6 +1243,7 @@ export interface usersFieldRefs {
   readonly phone: Prisma.FieldRef<"users", 'String'>
   readonly is_active: Prisma.FieldRef<"users", 'Boolean'>
   readonly created_at: Prisma.FieldRef<"users", 'DateTime'>
+  readonly refresh_token_hash: Prisma.FieldRef<"users", 'String'>
 }
     
 
@@ -1512,6 +1658,30 @@ export type users$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.OrdersScalarFieldEnum | Prisma.OrdersScalarFieldEnum[]
+}
+
+/**
+ * users.refresh_sessions
+ */
+export type users$refresh_sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the refresh_sessions
+   */
+  select?: Prisma.refresh_sessionsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the refresh_sessions
+   */
+  omit?: Prisma.refresh_sessionsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.refresh_sessionsInclude<ExtArgs> | null
+  where?: Prisma.refresh_sessionsWhereInput
+  orderBy?: Prisma.refresh_sessionsOrderByWithRelationInput | Prisma.refresh_sessionsOrderByWithRelationInput[]
+  cursor?: Prisma.refresh_sessionsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Refresh_sessionsScalarFieldEnum | Prisma.Refresh_sessionsScalarFieldEnum[]
 }
 
 /**

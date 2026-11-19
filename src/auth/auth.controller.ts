@@ -1,12 +1,30 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service.js';
 import { RegisterDto } from './dto/register.dto.js';
 import { LoginDto } from './dto/login.dto.js';
+import type { Request, Response } from 'express';
+import { RefreshTokenService } from './refresh-token.service.js';
+import { PrismaService } from '../prisma/prisma.service.js';
+import { JwtService } from '@nestjs/jwt';
+
+const COOKIE_NAME = 'refresh_token';
+const COOKIE_AGE = 7 * 24 * 60 * 60 * 1000;
+
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'strict' as const,
+  path: '/auth',
+};
+
 
 @Controller('auth')
 export class AuthController {
 
-    constructor(private readonly authService: AuthService) {}
+    constructor(private readonly authService: AuthService,
+                private readonly refreshTokens: RefreshTokenService,
+                private readonly prisma: PrismaService,
+                private readonly jwtService: JwtService) {}
 
     // Register a new user 
     // @Body() dto: RegisterDto contains the registration details of the user
@@ -34,4 +52,21 @@ export class AuthController {
         return this.authService.login(dto);
     }
 
+
+
+    @Get('refresh')
+    async refresh(@Req() req: Request) {
+
+        // get the refresh token from header refreshtoken
+
+        const token = req.headers['refreshtoken'] as string;
+    if (!token) {
+            throw new UnauthorizedException('No refresh token provided');
+        }
+        return this.authService.refresh(token);
+    }
+
+
+
+     
 }

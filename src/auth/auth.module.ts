@@ -4,6 +4,7 @@ import { AuthService } from './auth.service.js';
 import { PrismaModule } from '../prisma/prisma.module.js';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { RefreshTokenService } from './refresh-token.service.js';
 
 @Global()
 @Module({
@@ -25,7 +26,7 @@ import { JwtModule } from '@nestjs/jwt';
   ],
 
   controllers: [AuthController],
-  providers: [AuthService],
-  exports: [JwtModule],
+  providers: [AuthService, RefreshTokenService],
+  exports: [JwtModule, RefreshTokenService],
 })
 export class AuthModule {}

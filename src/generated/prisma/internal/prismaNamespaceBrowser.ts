@@ -56,7 +56,8 @@ export const ModelName = {
   products: 'products',
   roles: 'roles',
   user_roles: 'user_roles',
-  users: 'users'
+  users: 'users',
+  refresh_sessions: 'refresh_sessions'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -132,10 +133,23 @@ export const UsersScalarFieldEnum = {
   password_hash: 'password_hash',
   phone: 'phone',
   is_active: 'is_active',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  refresh_token_hash: 'refresh_token_hash'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+
+
+export const Refresh_sessionsScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  token_hash: 'token_hash',
+  expires_at: 'expires_at',
+  revoked_at: 'revoked_at',
+  created_at: 'created_at'
+} as const
+
+export type Refresh_sessionsScalarFieldEnum = (typeof Refresh_sessionsScalarFieldEnum)[keyof typeof Refresh_sessionsScalarFieldEnum]
 
 
 export const SortOrder = {

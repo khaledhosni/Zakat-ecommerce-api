@@ -402,7 +402,8 @@ export const ModelName = {
   products: 'products',
   roles: 'roles',
   user_roles: 'user_roles',
-  users: 'users'
+  users: 'users',
+  refresh_sessions: 'refresh_sessions'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -418,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "order_items" | "orders" | "products" | "roles" | "user_roles" | "users"
+    modelProps: "order_items" | "orders" | "products" | "roles" | "user_roles" | "users" | "refresh_sessions"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -866,6 +867,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    refresh_sessions: {
+      payload: Prisma.$refresh_sessionsPayload<ExtArgs>
+      fields: Prisma.refresh_sessionsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.refresh_sessionsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.refresh_sessionsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload>
+        }
+        findFirst: {
+          args: Prisma.refresh_sessionsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.refresh_sessionsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload>
+        }
+        findMany: {
+          args: Prisma.refresh_sessionsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload>[]
+        }
+        create: {
+          args: Prisma.refresh_sessionsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload>
+        }
+        createMany: {
+          args: Prisma.refresh_sessionsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.refresh_sessionsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload>[]
+        }
+        delete: {
+          args: Prisma.refresh_sessionsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload>
+        }
+        update: {
+          args: Prisma.refresh_sessionsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload>
+        }
+        deleteMany: {
+          args: Prisma.refresh_sessionsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.refresh_sessionsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.refresh_sessionsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload>[]
+        }
+        upsert: {
+          args: Prisma.refresh_sessionsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$refresh_sessionsPayload>
+        }
+        aggregate: {
+          args: Prisma.Refresh_sessionsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRefresh_sessions>
+        }
+        groupBy: {
+          args: Prisma.refresh_sessionsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Refresh_sessionsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.refresh_sessionsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Refresh_sessionsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -962,10 +1037,23 @@ export const UsersScalarFieldEnum = {
   password_hash: 'password_hash',
   phone: 'phone',
   is_active: 'is_active',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  refresh_token_hash: 'refresh_token_hash'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+
+
+export const Refresh_sessionsScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  token_hash: 'token_hash',
+  expires_at: 'expires_at',
+  revoked_at: 'revoked_at',
+  created_at: 'created_at'
+} as const
+
+export type Refresh_sessionsScalarFieldEnum = (typeof Refresh_sessionsScalarFieldEnum)[keyof typeof Refresh_sessionsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1245,6 +1333,7 @@ export type GlobalOmitConfig = {
   roles?: Prisma.rolesOmit
   user_roles?: Prisma.user_rolesOmit
   users?: Prisma.usersOmit
+  refresh_sessions?: Prisma.refresh_sessionsOmit
 }
 
 /* Types for Logging */

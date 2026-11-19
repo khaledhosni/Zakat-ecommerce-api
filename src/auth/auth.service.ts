@@ -12,6 +12,8 @@ import { PrismaService } from '../prisma/prisma.service.js';
 import { RegisterDto } from './dto/register.dto.js';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto.js';
+import { RefreshTokenService } from './refresh-token.service.js';
+import { createHash, randomUUID } from 'crypto';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +21,14 @@ export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
+    private readonly refreshTokens: RefreshTokenService,
   ) {}
+
+
+    private hash(token: string): string {
+      return createHash('sha256').update(token).digest('hex');
+    }
+  
 
   async register(dto: RegisterDto) {
 
@@ -176,11 +185,18 @@ export class AuthService {
     };
 
     // STEP 9: Generate access token
-    const accessToken =
-      await this.jwtService.signAsync(payload);
+    // const accessToken =
+    //   await this.jwtService.signAsync(payload);
 
-    // STEP 10: Return response
+    //   const refreshToken = await this.refreshTokens.create(user.user_id);
+   
+
+
+   const {refresh_token: refreshToken, access_token: accessToken, expires_in: expiresIn}= await this.createTokens(user.user_id, user.email, payload.roles);
+     // add refresh token to database 
+      // STEP 10: Return response
     return {
+      refresh_token: refreshToken,  
       access_token: accessToken,
       token_type: 'Bearer',
       expires_in: 3600,
@@ -195,4 +211,124 @@ export class AuthService {
     };
   }
 
+
+
+  // 2. Generate both tokens
+  private async createTokens(
+    id: bigint,
+    email: string,
+    roles: string[],
+    oldHash?: string,
+  ) {
+    const access_token = await this.jwtService.signAsync(
+      {
+        sub: id.toString(),
+        email,
+        roles,
+      },
+      {
+        secret: process.env.JWT_SECRET!,
+        expiresIn: '15m',
+      },
+    );
+
+    const refresh_token = await this.jwtService.signAsync(
+      {
+        sub: id.toString(),
+        type: 'refresh',
+        jti: randomUUID(),
+      },
+      {
+        secret: process.env.JWT_REFRESH_SECRET!,
+        expiresIn: '7d',
+      },
+    );
+
+    const newHash = this.hash(refresh_token);
+
+    if (oldHash) {
+      // Replace the old token only if it is still valid
+      const result = await this.prisma.users.updateMany({
+        where: {
+          user_id: id,
+          refresh_token_hash: oldHash,
+        },
+        data: {
+          refresh_token_hash: newHash,
+        },
+      });
+
+      if (result.count !== 1) {
+        throw new UnauthorizedException('Token already used');
+      }
+    } else {
+      // First login: save the refresh-token hash
+      await this.prisma.users.update({
+        where: { user_id: id },
+        data: {
+          refresh_token_hash: newHash,
+        },
+      });
+    }
+
+    return {
+      access_token,
+      refresh_token,
+      token_type: 'Bearer',
+      expires_in: 900,
+    };
+  }
+
+
+    async refresh(token: string) {
+    let payload: { sub: string; type: string };
+
+    try {
+      payload = await this.jwtService.verifyAsync(token, {
+        secret: process.env.JWT_REFRESH_SECRET!,
+      });
+    } catch {
+      throw new UnauthorizedException(
+        'Invalid or expired refresh token',
+      );
+    }
+
+    if (
+      payload.type !== 'refresh' ||
+      !/^\d+$/.test(payload.sub)
+    ) {
+      throw new UnauthorizedException('Invalid token');
+    }
+
+    const user = await this.prisma.users.findUnique({
+      where: {
+        user_id: BigInt(payload.sub),
+      },
+      include: {
+        user_roles: {
+          include: { roles: true },
+        },
+      },
+    });
+
+    const oldHash = this.hash(token);
+
+    if (
+      !user?.is_active ||
+      user.refresh_token_hash !== oldHash
+    ) {
+      throw new UnauthorizedException('Token revoked');
+    }
+
+    const roles = user.user_roles.map(
+      r => r.roles.role_name,
+    );
+
+    return this.createTokens(
+      user.user_id,
+      user.email,
+      roles,
+      oldHash,
+    );
+  }
 }

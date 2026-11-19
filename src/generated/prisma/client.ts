@@ -71,3 +71,8 @@ export type user_roles = Prisma.user_rolesModel
  * This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
  */
 export type users = Prisma.usersModel
+/**
+ * Model refresh_sessions
+ * 
+ */
+export type refresh_sessions = Prisma.refresh_sessionsModel
